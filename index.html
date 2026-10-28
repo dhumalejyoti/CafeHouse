@@ -208,7 +208,7 @@
       adminStatus.textContent='Updating '+ids.length+' review(s)…';
       try{
         // Request the updated IDs so we can detect RLS policies that silently update zero rows.
-        const request=supabaseClient.from('cafe_reviews').update({approved}).in('id',ids).select('id');
+        const request=supabaseClient.from('cafe_reviews').update({approved: approve}).in('id',ids).select('id');
         const result=await Promise.race([
           request,
           new Promise((_,reject)=>setTimeout(()=>reject(new Error('The request took too long. Check your connection and Supabase status, then refresh the page.')),15000))
