@@ -111,8 +111,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script>
-    // Supabase connection settings live in config.js so they can be changed without editing index.html.
-    // Never put a Supabase service_role key in any frontend file.
+    // Read the public Supabase configuration from config.js.
+    // Never put a Supabase service_role or secret key in frontend code.
     const SUPABASE_URL = window.CAFE_SUPABASE_CONFIG?.url || "";
     const SUPABASE_ANON_KEY = window.CAFE_SUPABASE_CONFIG?.publishableKey || "";
     const ZOMATO_URL = "https://zomato.onelink.me/xqzv/ffnzlzh7";
@@ -174,7 +174,7 @@
     window.addEventListener('hashchange',showAdminRoute);
     document.getElementById('ownerLink').addEventListener('click',()=>{setTimeout(showAdminRoute,0);});
     async function refreshAdminSession(){
-      if(!supabaseClient){ownerLoginStatus.textContent='Owner login is not configured. Add your Supabase project URL and publishable key in config.js.';return;}
+      if(!supabaseClient){ownerLoginStatus.textContent='Owner login is not configured. Add your Supabase project URL and public key in this file.';return;}
       const {data:{session}}=await supabaseClient.auth.getSession();
       if(!session){adminLoginBox.style.display='block';adminDashboard.style.display='none';ownerLogout.style.display='none';return;}
       const {data:adminRow,error}=await supabaseClient.from('cafe_review_admins').select('user_id').eq('user_id',session.user.id).maybeSingle();
