@@ -57,7 +57,7 @@
           <!-- Demo menu cards are populated below. Replace them with the actual Zomato menu before publishing. -->
         </div>
         <div class="menu-footer"><a class="btn" href="https://zomato.onelink.me/xqzv/ffnzlzh7" target="_blank" rel="noopener">View full menu & order on Zomato ↗</a></div>
-        <p class="note">Menu items and prices are transcribed from the supplied Zomato screenshots. Some descriptions were clipped in the screenshots and have been shortened for display.</p>
+        <p class="note">Menu items, prices and images below are starter examples. Update them to match Jyoti's actual menu before publishing.</p>
       </div>
     </section>
 
@@ -105,25 +105,14 @@
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFza3lobnlqc2JweXRrYWF0cXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxODc3NDMsImV4cCI6MjEwODc2Mzc0M30.icJcceGPL6gJ99dHVfCymhTF46ough1U-7BI10Gs0w8";
     const ZOMATO_URL = "https://zomato.onelink.me/xqzv/ffnzlzh7";
 
-    // Menu transcribed from the Zomato screenshots supplied by the café owner.
-    // Where the screenshot clipped the description, wording has been kept concise.
+    // Starter examples only — replace item names, prices, descriptions and photos with the actual café menu.
     const menuItems = [
-      {name:"Veg Grilled Sandwich",price:"₹110",category:"Sandwiches",description:"Crispy grilled bread stuffed with fresh veggies and flavourful spices.",image:"assets/sandwich_veg.jpg"},
-      {name:"Veg Cheese Grilled Sandwich",price:"₹120",category:"Sandwiches",description:"Crispy grilled bread filled with gooey melted cheese, perfectly toasted.",image:"assets/sandwich_veg_cheese.jpg"},
-      {name:"Paneer Grilled Sandwich",price:"₹130",category:"Sandwiches",description:"Crispy grilled sandwich stuffed with flavourful paneer and fresh veggies.",image:"assets/sandwich_paneer.jpg"},
-      {name:"Paneer Cheese Grilled Sandwich",price:"₹140",category:"Sandwiches",description:"Crispy grilled sandwich loaded with spicy paneer and melted cheese.",image:"assets/sandwich_paneer_cheese.jpg"},
-      {name:"Cheese Burger",price:"₹100",category:"Burgers",description:"Soft toasted bun filled with a juicy patty, melted cheese and fresh veggies.",image:"assets/burger_cheese.jpg"},
-      {name:"Paneer Burger",price:"₹110",category:"Burgers",description:"Soft toasted bun loaded with a flavourful paneer patty and fresh veggies.",image:"assets/burger_paneer.jpg"},
-      {name:"Cheese Paneer Burger",price:"₹120",category:"Burgers",description:"Soft toasted bun loaded with flavourful paneer and melted cheese.",image:"assets/burger_cheese_paneer.jpg"},
-      {name:"Veg Burger",price:"₹100",category:"Burgers",description:"A delicious veggie patty loaded with fresh veggies and creamy sauce.",image:"assets/burger_veg.jpg"},
-      {name:"Mango Milkshake",price:"₹90",category:"Drinks",description:"Creamy, chilled milkshake with a rich, refreshing mango flavour.",image:"assets/drink_pineapple.jpg"},
-      {name:"Strawberry Milkshake",price:"₹90",category:"Drinks",description:"A creamy, chilled strawberry milkshake.",image:"assets/drink_oreo.jpg"},
-      {name:"Pineapple Milkshake",price:"₹90",category:"Drinks",description:"Creamy, chilled milkshake with a refreshing, sweet pineapple flavour.",image:"assets/drink_pineapple.jpg"},
-      {name:"Oreo Milkshake",price:"₹110",category:"Drinks",description:"Creamy, chilled milkshake blended with crunchy Oreo cookies.",image:"assets/drink_oreo.jpg"},
-      {name:"Thick Cold Coffee",price:"₹80",category:"Drinks",description:"Thick, creamy cold coffee blended to perfection with a rich coffee flavour.",image:"assets/drink_cold_coffee.jpg"},
-      {name:"Plain Fries",price:"₹80",category:"Fries",description:"Crispy golden fries, perfectly seasoned and served hot.",image:"assets/fries_plain.jpg"},
-      {name:"Masala Fries",price:"₹90",category:"Fries",description:"Crispy golden fries tossed in spicy, flavourful seasoning.",image:"assets/fries_masala.jpg"},
-      {name:"Cheese Burger + Plain Fries + Thick Cold Coffee",price:"₹200",category:"Combo",description:"A delicious combo with a cheese burger, plain fries and thick cold coffee.",image:"assets/burger_cheese.jpg"}
+      {name:"Masala Chai",price:"₹40",category:"Tea & coffee",description:"A comforting cup brewed with aromatic spices.",image:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=80"},
+      {name:"Cold Coffee",price:"₹120",category:"Tea & coffee",description:"Chilled, creamy and perfect for a little break.",image:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80"},
+      {name:"Veg Sandwich",price:"₹100",category:"Quick bites",description:"A satisfying, freshly prepared café favourite.",image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      {name:"Paneer Roll",price:"₹140",category:"Quick bites",description:"A flavour-packed bite for your hunger pangs.",image:"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80"},
+      {name:"Chocolate Brownie",price:"₹90",category:"Sweet treats",description:"A rich little treat for your sweet tooth.",image:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"},
+      {name:"Fresh Snack Box",price:"₹180",category:"Cafe favourites",description:"A shareable selection for a relaxed snack break.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"}
     ];
 
     const menuGrid = document.getElementById("menuGrid");

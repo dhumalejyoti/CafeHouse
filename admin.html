@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Review Admin | Jyoti's Cafe House</title>
+<style>
+:root{--green:#254c3d;--cream:#f8f4ed;--paper:#fffdf8;--ink:#29271f;--muted:#777268;--line:#e5ddcf;--red:#a62d2d;--gold:#d88a36}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.5 Arial,sans-serif}header{background:var(--green);color:white;padding:22px max(20px,calc((100% - 1050px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}header h1{font:27px Georgia,serif;margin:0}header a{color:white}main{max-width:1050px;margin:30px auto;padding:0 18px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 6px 24px #3427130a}.panel h2{font:25px Georgia,serif;margin:0 0 7px}.muted{color:var(--muted)}label{display:block;font-size:13px;font-weight:bold;margin:12px 0 5px}input{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;font:inherit;background:white}button{border:0;border-radius:9px;padding:11px 15px;font-weight:bold;cursor:pointer;background:var(--green);color:white}button:disabled{opacity:.55;cursor:not-allowed}.secondary{background:#ece5d9;color:var(--ink)}.danger{background:var(--red)}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:18px 0}.status{margin-top:12px;font-size:14px;white-space:pre-wrap}.review{border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0;background:white;display:grid;grid-template-columns:auto 1fr;gap:12px}.review input[type=checkbox],#selectAll{width:18px;height:18px;margin-top:5px}.review h3{margin:0;font-size:17px}.stars{color:var(--gold);letter-spacing:2px}.meta{font-size:12px;color:var(--muted);margin:3px 0 8px}.review p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.hidden{display:none!important}.count{font-weight:bold;color:var(--green)}.warn{font-size:13px;color:var(--red)}@media(max-width:600px){header{align-items:flex-start;flex-direction:column}.panel{padding:17px}.toolbar button{flex:1}}
+</style>
+</head>
+<body>
+<header><h1>Jyoti's Cafe House · Review Admin</h1><a href="./index.html">View website ↗</a></header>
+<main>
+<section class="panel" id="loginPanel"><h2>Owner login</h2><p class="muted">Sign in with the owner account created in Supabase Authentication.</p>
+<form id="loginForm"><label for="email">Owner email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><div class="toolbar"><button id="loginBtn" type="submit">Sign in</button></div></form><div id="loginStatus" class="status" role="status"></div>
+</section>
+<section class="panel hidden" id="dashboard"><div style="display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap"><div><h2>Customer reviews</h2><p class="muted">Select several reviews and approve or reject them together.</p><div class="count" id="pendingCount">Loading…</div></div><button class="secondary" id="logoutBtn">Sign out</button></div>
+<div class="toolbar"><label style="display:flex;align-items:center;gap:8px;margin:0;font-weight:normal"><input type="checkbox" id="selectAll"> Select all pending</label><button id="approveSelected">Approve selected</button><button id="rejectSelected" class="danger">Reject selected</button><button id="refreshBtn" class="secondary">Refresh</button></div>
+<div class="toolbar"><button id="approveAll">Approve ALL pending</button><button id="rejectAll" class="danger">Reject ALL pending</button></div>
+<p class="warn">Reject permanently deletes selected reviews. Check the selection before using bulk actions.</p><div id="reviews"></div><div id="dashboardStatus" class="status" role="status"></div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// Use the same public project URL and publishable/anon key as index.html. Never use service_role/secret keys here.
+const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
+const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes("PASTE_");
+const client = configured && window.supabase ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
+const $ = id => document.getElementById(id); let pending=[];
+function status(id,msg,isError=false){$(id).textContent=msg;$(id).style.color=isError?'#a62d2d':'#254c3d'}
+function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dateLabel(v){return v?new Date(v).toLocaleString():''}
+function selectedIds(){return [...document.querySelectorAll('.review-check:checked')].map(el=>Number(el.value))}
+function render(){ $('pendingCount').textContent=`${pending.length} pending review${pending.length===1?'':'s'}`; $('selectAll').checked=pending.length>0&&selectedIds().length===pending.length; $('reviews').innerHTML=pending.length?pending.map(r=>`<article class="review"><input class="review-check" type="checkbox" value="${Number(r.id)}" aria-label="Select review from ${escapeHtml(r.name)}"><div><h3>${escapeHtml(r.name||'A customer')} <span class="stars">${'★'.repeat(Number(r.rating))}${'☆'.repeat(5-Number(r.rating))}</span></h3><div class="meta">Submitted ${escapeHtml(dateLabel(r.created_at))} · Review #${Number(r.id)}</div><p>${escapeHtml(r.review)}</p></div></article>`).join(''):'<p class="muted">No pending reviews. You are all caught up!</p>'; }
+async function loadReviews(){status('dashboardStatus','Loading pending reviews…');const {data,error}=await client.from('cafe_reviews').select('id,name,rating,review,approved,created_at').eq('approved',false).order('created_at',{ascending:true}).limit(500);if(error){status('dashboardStatus','Could not load reviews: '+error.message,true);return}pending=data||[];render();status('dashboardStatus','');}
+async function checkSession(){if(!client){status('loginStatus','Add your Supabase Project URL and publishable/anon key to admin.html first.',true);$('loginBtn').disabled=true;return}const {data}=await client.auth.getSession();if(data.session){$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');await loadReviews()}}
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();if(!client)return;const btn=$('loginBtn');btn.disabled=true;status('loginStatus','Signing in…');const {error}=await client.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;if(error){status('loginStatus','Sign-in failed: '+error.message,true);return}$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');await loadReviews()});
+$('logoutBtn').onclick=async()=>{await client.auth.signOut();pending=[];$('dashboard').classList.add('hidden');$('loginPanel').classList.remove('hidden');$('password').value='';status('loginStatus','You have signed out.')};
+$('refreshBtn').onclick=loadReviews;$('selectAll').onchange=()=>{document.querySelectorAll('.review-check').forEach(el=>el.checked=$('selectAll').checked)};
+async function runAction(kind,ids){if(!ids.length){status('dashboardStatus','Select at least one review first.',true);return}let label=kind==='approve'?'approve':'permanently delete (reject)';if(!confirm(`Are you sure you want to ${label} ${ids.length} review(s)?`))return;status('dashboardStatus','Processing…');let result;if(kind==='approve'){result=await client.from('cafe_reviews').update({approved:true}).in('id',ids).eq('approved',false)}else{result=await client.from('cafe_reviews').delete().in('id',ids).eq('approved',false)}if(result.error){status('dashboardStatus','Action failed: '+result.error.message,true);return}status('dashboardStatus',`${ids.length} review(s) ${kind==='approve'?'approved':'rejected'}.`);await loadReviews()}
+$('approveSelected').onclick=()=>runAction('approve',selectedIds());$('rejectSelected').onclick=()=>runAction('reject',selectedIds());$('approveAll').onclick=()=>runAction('approve',pending.map(r=>Number(r.id)));$('rejectAll').onclick=()=>runAction('reject',pending.map(r=>Number(r.id)));
+client?.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){ $('dashboard').classList.add('hidden');$('loginPanel').classList.remove('hidden')}});checkSession();
+</script>
+</body></html>

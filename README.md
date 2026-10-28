@@ -8,7 +8,7 @@ This is a lightweight single-page café website with:
 - Free static hosting compatibility (GitHub Pages)
 
 ## Important before publishing
-The menu has now been transcribed from the Zomato screenshots supplied by the café owner. Prices and visible item names have been added, and the supplied product photos are stored in `assets/`. A few screenshot descriptions were clipped and shortened; some drink photos may be approximate because the supplied product-photo set does not clearly label every drink.
+The menu currently contains **starter/demo items and example prices**, not the actual menu from Zomato. Replace the `menuItems` array in `index.html` with your real items, current prices, descriptions, and photo URLs. The Zomato link could not be read automatically, so the menu must be copied from your Zomato listing or supplied by the café owner.
 
 ## Connect review storage (Supabase free tier)
 1. Create a project at https://supabase.com/.
@@ -42,7 +42,7 @@ After publishing, generate a QR code that points to:
 Use the final live URL before printing stickers. If you rename the repository or change the published address later, the QR code may need reprinting.
 
 ## Photos
-The website uses the food photos supplied in the uploaded ZIP, stored in `assets/`. Some milkshake photos are reused where an exact drink-photo match was not clear.
+This starter uses remote Unsplash image URLs for illustrative food photos. Replace them with your own menu photos or photos you have permission to use for a more authentic result. If you prefer local images, create an `assets` folder and update the image paths.
 
 ## Note
 The Supabase free tier's limits and policies can change. For a small home café, it is usually enough to get started, but check current limits in your account.
