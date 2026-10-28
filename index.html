@@ -24,7 +24,7 @@
     .reviews-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:start}.review-intro p{color:var(--muted)}.rating-summary{display:flex;align-items:center;gap:12px;margin:24px 0}.rating-number{font:44px Georgia,serif}.stars{color:#d88a36;letter-spacing:2px}.review-count{font-size:12px;color:var(--muted)}.review-form{background:var(--paper);border:1px solid var(--line);padding:25px;border-radius:20px}.review-form h3{font:25px Georgia,serif;margin:0 0 6px}.review-form>p{font-size:13px;color:var(--muted);margin:0 0 20px}.field{margin-bottom:15px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field textarea{width:100%;padding:12px 13px;border:1px solid #ded4c6;background:#fffefa;border-radius:10px;outline:none}.field input:focus,.field textarea:focus{border-color:var(--green)}.field textarea{min-height:100px;resize:vertical}.star-picker{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:5px}.star-picker input{position:absolute;opacity:0;pointer-events:none}.star-picker label{font-size:28px;color:#d8cfc2;cursor:pointer;margin:0}.star-picker label:hover,.star-picker label:hover~label,.star-picker input:checked~label{color:#d88a36}.form-status{font-size:13px;margin-top:12px;color:var(--green)}.reviews-list{display:grid;gap:13px;margin-top:24px}.review-item{background:var(--paper);border:1px solid var(--line);padding:17px 19px;border-radius:15px}.review-item-top{display:flex;justify-content:space-between;gap:15px}.review-item strong{font-family:Georgia,serif;font-size:17px}.review-item p{font-size:14px;color:var(--muted);margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.empty-reviews{padding:18px;border:1px dashed #d7c9b8;border-radius:14px;color:var(--muted);font-size:13px}
     .cta{padding:0 0 76px}.cta-box{background:var(--green);color:#fff7e9;border-radius:22px;padding:34px 38px;display:flex;align-items:center;justify-content:space-between;gap:25px}.cta-box h2{font:clamp(28px,3vw,40px) Georgia,serif;margin:0 0 6px}.cta-box p{margin:0;color:#e2e0d2;font-size:14px}.footer{padding:26px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
     .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.chip{border:1px solid var(--line);background:var(--paper);color:var(--green);border-radius:999px;padding:8px 15px;font-size:13px;font-weight:700;cursor:pointer}.chip.on,.chip:hover{background:var(--green);color:#fff}
-    .star-picker input:focus-visible+label{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+    .star-picker input:focus-visible+label{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px}.pager{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;font-size:13px;color:var(--muted)}.pager .chip{padding:6px 13px}.pager .chip:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--green)}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
     .info{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;font-size:14px;color:#544d43;padding:0 0 10px}.info a{color:var(--green);font-weight:700}.footer a{color:inherit}.admin-link{opacity:.6}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
     @media(max-width:800px){
@@ -96,6 +96,7 @@
           <div class="rating-summary"><div class="rating-number" id="averageRating">—</div><div><div class="stars" id="averageStars">☆☆☆☆☆</div><div class="review-count" id="reviewCount">Approved customer reviews</div></div></div>
           <h3 style="font:24px Georgia,serif;margin:28px 0 0">Customer notes</h3>
           <div class="reviews-list" id="reviewsList"><div class="empty-reviews">Loading approved reviews…</div></div>
+          <div class="pager" id="reviewsPager"></div>
         </div>
         <form class="review-form" id="reviewForm">
           <h3>Leave a review</h3><p>Reviews are checked by us before appearing publicly.</p>
@@ -267,20 +268,26 @@
 
 
     function stars(n){return "★".repeat(Number(n)) + "☆".repeat(5-Number(n));}
-    function renderReviews(reviews){
-      const list = document.getElementById("reviewsList");
-      const count = reviews.length;
-      document.getElementById("reviewCount").textContent = `${count} approved review${count===1?"":"s"}`;
-      if(!count){document.getElementById("averageRating").textContent="—";document.getElementById("averageStars").textContent="☆☆☆☆☆";list.innerHTML='<div class="empty-reviews">No reviews yet. Be the first to share your experience!</div>';return;}
-      const avg = reviews.reduce((sum,r)=>sum+Number(r.rating),0)/count;
+    const REVIEWS_PER_PAGE=10; let allReviews=[], reviewPage=1;
+    function renderReviews(reviews,keepPage){
+      allReviews=reviews; if(!keepPage) reviewPage=1;
+      const list=document.getElementById("reviewsList"), pager=document.getElementById("reviewsPager");
+      const count=reviews.length;
+      document.getElementById("reviewCount").textContent=`${count} approved review${count===1?"":"s"}`;
+      if(!count){document.getElementById("averageRating").textContent="—";document.getElementById("averageStars").textContent="☆☆☆☆☆";list.innerHTML='<div class="empty-reviews">No reviews yet. Be the first to share your experience!</div>';pager.innerHTML="";return;}
+      const avg=reviews.reduce((sum,r)=>sum+Number(r.rating),0)/count;
       document.getElementById("averageRating").textContent=avg.toFixed(1);
       document.getElementById("averageStars").textContent=stars(Math.round(avg));
-      list.innerHTML=reviews.map(r=>`<article class="review-item"><div class="review-item-top"><strong>${escapeHtml(r.name || "A customer")}</strong><span class="stars" aria-label="${r.rating} out of 5 stars">${stars(r.rating)}</span></div><p>${escapeHtml(r.review)}</p></article>`).join("");
+      const pages=Math.ceil(count/REVIEWS_PER_PAGE); reviewPage=Math.min(Math.max(reviewPage,1),pages);
+      const slice=reviews.slice((reviewPage-1)*REVIEWS_PER_PAGE,reviewPage*REVIEWS_PER_PAGE);
+      list.innerHTML=slice.map(r=>`<article class="review-item"><div class="review-item-top"><strong>${escapeHtml(r.name || "A customer")}</strong><span class="stars" aria-label="${r.rating} out of 5 stars">${stars(r.rating)}</span></div><p>${escapeHtml(r.review)}</p></article>`).join("");
+      pager.innerHTML=pages>1?`<button type="button" class="chip" data-p="${reviewPage-1}" ${reviewPage===1?"disabled":""}>← Prev</button><span>Page ${reviewPage} of ${pages}</span><button type="button" class="chip" data-p="${reviewPage+1}" ${reviewPage===pages?"disabled":""}>Next →</button>`:"";
     }
+    document.getElementById("reviewsPager").addEventListener("click",e=>{const b=e.target.closest("button[data-p]");if(!b||b.disabled)return;reviewPage=Number(b.dataset.p);renderReviews(allReviews,true);document.getElementById("reviewsList").scrollIntoView({behavior:"smooth",block:"start"});});
     function escapeHtml(value){return String(value).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
     async function loadReviews(){
       if(!supabaseClient){renderReviews([]);return;}
-      const {data,error}=await supabaseClient.from("cafe_reviews").select("id,name,rating,review,created_at").eq("approved",true).order("created_at",{ascending:false}).limit(50);
+      const {data,error}=await supabaseClient.from("cafe_reviews").select("id,name,rating,review,created_at").eq("approved",true).order("created_at",{ascending:false}).limit(200);
       if(error){document.getElementById("reviewsList").innerHTML='<div class="empty-reviews">Reviews are temporarily unavailable. Please try again later.</div>';return;}
       renderReviews(data||[]);
     }
