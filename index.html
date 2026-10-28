@@ -109,11 +109,12 @@
   <footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> Jyoti's Cafe House. Made with ♥.</span><span>Thank you for supporting a small home café.</span></div></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <script>
-    // Replace these two values with the public project URL and anon/publishable key from your Supabase project.
-    // Never put a Supabase service_role key in this file.
-    const SUPABASE_URL = "https://askyhnyjsbpytkaatqst.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFza3lobnlqc2JweXRrYWF0cXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxODc3NDMsImV4cCI6MjEwODc2Mzc0M30.icJcceGPL6gJ99dHVfCymhTF46ough1U-7BI10Gs0w8";
+    // Supabase connection settings live in config.js so they can be changed without editing index.html.
+    // Never put a Supabase service_role key in any frontend file.
+    const SUPABASE_URL = window.CAFE_SUPABASE_CONFIG?.url || "";
+    const SUPABASE_ANON_KEY = window.CAFE_SUPABASE_CONFIG?.publishableKey || "";
     const ZOMATO_URL = "https://zomato.onelink.me/xqzv/ffnzlzh7";
 
     // Menu transcribed from the Zomato screenshots supplied by the café owner.
@@ -173,7 +174,7 @@
     window.addEventListener('hashchange',showAdminRoute);
     document.getElementById('ownerLink').addEventListener('click',()=>{setTimeout(showAdminRoute,0);});
     async function refreshAdminSession(){
-      if(!supabaseClient){ownerLoginStatus.textContent='Owner login is not configured. Add your Supabase project URL and public key in this file.';return;}
+      if(!supabaseClient){ownerLoginStatus.textContent='Owner login is not configured. Add your Supabase project URL and publishable key in config.js.';return;}
       const {data:{session}}=await supabaseClient.auth.getSession();
       if(!session){adminLoginBox.style.display='block';adminDashboard.style.display='none';ownerLogout.style.display='none';return;}
       const {data:adminRow,error}=await supabaseClient.from('cafe_review_admins').select('user_id').eq('user_id',session.user.id).maybeSingle();
@@ -201,10 +202,36 @@
     async function updateSelectedReviews(approve){
       const ids=[...document.querySelectorAll('.pending-check:checked')].map(c=>Number(c.value));
       if(!ids.length){adminStatus.textContent='Select at least one review first.';return;}
+      if(!supabaseClient){adminStatus.textContent='Supabase is not configured.';return;}
+      const actionButtons=[document.getElementById('approveSelected'),document.getElementById('rejectSelected')];
+      actionButtons.forEach(b=>b.disabled=true);
       adminStatus.textContent='Updating '+ids.length+' review(s)…';
-      const {error}=await supabaseClient.from('cafe_reviews').update({approved}).in('id',ids);
-      if(error){adminStatus.textContent='Could not update reviews: '+error.message;return;}
-      adminStatus.textContent=ids.length+' review(s) '+(approve?'approved.':'rejected and hidden.');document.getElementById('selectAllReviews').checked=false;await loadPendingReviews();await loadReviews();
+      try{
+        // Request the updated IDs so we can detect RLS policies that silently update zero rows.
+        const request=supabaseClient.from('cafe_reviews').update({approved}).in('id',ids).select('id');
+        const result=await Promise.race([
+          request,
+          new Promise((_,reject)=>setTimeout(()=>reject(new Error('The request took too long. Check your connection and Supabase status, then refresh the page.')),15000))
+        ]);
+        if(result.error) throw result.error;
+        const updated=result.data||[];
+        if(updated.length===0){
+          adminStatus.textContent='No reviews were updated. Check that you are logged in as an admin and that the “Admins update reviews” RLS policy is enabled in Supabase.';
+          return;
+        }
+        if(updated.length!==ids.length){
+          adminStatus.textContent='Updated '+updated.length+' of '+ids.length+' reviews. Check admin permissions and refresh the pending list.';
+        }else{
+          adminStatus.textContent=updated.length+' review(s) '+(approve?'approved.':'rejected and hidden.');
+        }
+        document.getElementById('selectAllReviews').checked=false;
+        await loadPendingReviews();
+        await loadReviews();
+      }catch(err){
+        adminStatus.textContent='Could not update reviews: '+(err?.message||String(err));
+      }finally{
+        actionButtons.forEach(b=>b.disabled=false);
+      }
     }
     document.getElementById('approveSelected').addEventListener('click',()=>updateSelectedReviews(true));
     document.getElementById('rejectSelected').addEventListener('click',()=>updateSelectedReviews(false));
