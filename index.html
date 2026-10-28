@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f8f3eb">
+  <meta property="og:title" content="Jyoti's Cafe House">
+  <meta property="og:description" content="Homemade sandwiches, burgers, fries and shakes. Order on Zomato.">
+  <meta property="og:image" content="assets/sandwich_paneer_cheese.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23344d3b'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='%23fff7e8' font-family='Georgia'%3EJ%3C/text%3E%3C/svg%3E">
   <meta name="description" content="Fresh, comforting food from Jyoti's Cafe House. Explore our menu and share your experience.">
   <title>Jyoti's Cafe House | Made with love</title>
   <style>
@@ -19,6 +23,10 @@
     .about{background:#efe6d9}.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}.about-photo{height:400px;border-radius:20px;overflow:hidden}.about-photo img{width:100%;height:100%;object-fit:cover}.about p{color:var(--muted)}.about-points{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px}.about-points div{border-left:2px solid var(--orange);padding-left:12px;font-size:13px;color:#544d43}.about-points strong{display:block;color:var(--green);font:20px Georgia,serif}
     .reviews-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:start}.review-intro p{color:var(--muted)}.rating-summary{display:flex;align-items:center;gap:12px;margin:24px 0}.rating-number{font:44px Georgia,serif}.stars{color:#d88a36;letter-spacing:2px}.review-count{font-size:12px;color:var(--muted)}.review-form{background:var(--paper);border:1px solid var(--line);padding:25px;border-radius:20px}.review-form h3{font:25px Georgia,serif;margin:0 0 6px}.review-form>p{font-size:13px;color:var(--muted);margin:0 0 20px}.field{margin-bottom:15px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field textarea{width:100%;padding:12px 13px;border:1px solid #ded4c6;background:#fffefa;border-radius:10px;outline:none}.field input:focus,.field textarea:focus{border-color:var(--green)}.field textarea{min-height:100px;resize:vertical}.star-picker{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:5px}.star-picker input{position:absolute;opacity:0;pointer-events:none}.star-picker label{font-size:28px;color:#d8cfc2;cursor:pointer;margin:0}.star-picker label:hover,.star-picker label:hover~label,.star-picker input:checked~label{color:#d88a36}.form-status{font-size:13px;margin-top:12px;color:var(--green)}.reviews-list{display:grid;gap:13px;margin-top:24px}.review-item{background:var(--paper);border:1px solid var(--line);padding:17px 19px;border-radius:15px}.review-item-top{display:flex;justify-content:space-between;gap:15px}.review-item strong{font-family:Georgia,serif;font-size:17px}.review-item p{font-size:14px;color:var(--muted);margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.empty-reviews{padding:18px;border:1px dashed #d7c9b8;border-radius:14px;color:var(--muted);font-size:13px}
     .cta{padding:0 0 76px}.cta-box{background:var(--green);color:#fff7e9;border-radius:22px;padding:34px 38px;display:flex;align-items:center;justify-content:space-between;gap:25px}.cta-box h2{font:clamp(28px,3vw,40px) Georgia,serif;margin:0 0 6px}.cta-box p{margin:0;color:#e2e0d2;font-size:14px}.footer{padding:26px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.chip{border:1px solid var(--line);background:var(--paper);color:var(--green);border-radius:999px;padding:8px 15px;font-size:13px;font-weight:700;cursor:pointer}.chip.on,.chip:hover{background:var(--green);color:#fff}
+    .star-picker input:focus-visible+label{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+    .info{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;font-size:14px;color:#544d43;padding:0 0 10px}.info a{color:var(--green);font-weight:700}.footer a{color:inherit}.admin-link{opacity:.6}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
     @media(max-width:800px){
       /* Mobile: keep all navigation links visible instead of hiding them. */
       .topbar{padding:12px 0}
@@ -38,7 +46,7 @@
     <div class="wrap nav">
       <a class="brand" href="#home" aria-label="Jyoti's Cafe House home"><span class="logo">J</span><span><strong>Jyoti's Cafe House</strong><small>Homemade with heart</small></span></a>
       <nav class="navlinks" aria-label="Main navigation">
-        <a href="#menu">Menu</a><a href="#about">Our story</a><a href="#reviews">Reviews</a><a href="#admin" id="ownerLink">Owner login</a><a class="btn" href="https://zomato.onelink.me/xqzv/ffnzlzh7" target="_blank" rel="noopener">Order on Zomato ↗</a>
+        <a href="#menu">Menu</a><a href="#about">Our story</a><a href="#reviews">Reviews</a><a class="btn" href="https://zomato.onelink.me/xqzv/ffnzlzh7" target="_blank" rel="noopener">Order on Zomato ↗</a>
       </nav>
     </div>
   </header>
@@ -53,7 +61,7 @@
           <p class="hero-note">Freshly prepared • Made for sharing • From our home to yours</p>
         </div>
         <div class="hero-photo">
-          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=85" alt="A table of freshly prepared food" fetchpriority="high">
+          <img src="assets/sandwich_paneer_cheese.jpg" alt="Paneer cheese grilled sandwich" fetchpriority="high">
           <div class="photo-tag"><b>A warm welcome</b>Every order means a lot to us.</div>
         </div>
       </div>
@@ -63,17 +71,19 @@
     <section id="menu">
       <div class="wrap">
         <div class="section-head"><div><div class="eyebrow">Made for your cravings</div><h2>Our menu</h2></div><p>Take a look at some favourites, then order directly through our Zomato page.</p></div>
+        <div class="filters" id="menuFilters" role="group" aria-label="Filter menu by category"></div>
         <div class="menu-grid" id="menuGrid">
-          <!-- Demo menu cards are populated below. Replace them with the actual Zomato menu before publishing. -->
+          <noscript><p>Please enable JavaScript to see the menu, or order on Zomato.</p></noscript>
         </div>
         <div class="menu-footer"><a class="btn" href="https://zomato.onelink.me/xqzv/ffnzlzh7" target="_blank" rel="noopener">View full menu & order on Zomato ↗</a></div>
-        <p class="note">Menu items and prices are transcribed from the supplied Zomato screenshots. Some descriptions were clipped in the screenshots and have been shortened for display.</p>
+        <p class="note">Prices in ₹. Prices on Zomato may differ slightly.</p>
+        <div class="info" id="cafeInfo"></div>
       </div>
     </section>
 
     <section class="about" id="about">
       <div class="wrap about-grid">
-        <div class="about-photo"><img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=85" alt="A welcoming home kitchen" loading="lazy"></div>
+        <div class="about-photo"><img src="assets/burger_cheese_paneer.jpg" alt="Cheese paneer burger" loading="lazy"></div>
         <div><div class="eyebrow">A little about us</div><h2>Small kitchen.<br>Big love.</h2><p>Jyoti's Cafe House is built around the simple joy of good food. We believe the best meals feel welcoming, familiar, and made with care.</p><p>Thank you for supporting our small home café. Every order and every kind review helps us grow.</p><div class="about-points"><div><strong>Made with care</strong>Every order matters</div><div><strong>From our home</strong>To your table</div></div></div>
       </div>
     </section>
@@ -98,6 +108,7 @@
             <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star">★</label>
           </div></div>
           <div class="field"><label for="reviewText">Your review</label><textarea id="reviewText" name="review" maxlength="1000" required placeholder="What did you enjoy about your order?"></textarea></div>
+          <input class="hp" type="text" name="website" id="reviewWebsite" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn" type="submit" id="submitReview">Submit review</button>
           <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
         </form>
@@ -108,17 +119,17 @@
 
   <section id="adminPanel" style="display:none;padding:45px 0;background:#f0e9dc">
     <div class="wrap">
-      <div class="section-head"><div><span class="eyebrow">Private owner area</span><h2>Review dashboard</h2><p>Sign in to approve or reject customer reviews in bulk.</p></div><button class="btn light" id="ownerLogout" style="display:none">Sign out</button></div>
+      <div class="section-head"><div><span class="eyebrow">Private owner area</span><h2>Review dashboard</h2><p>Approve or delete customer reviews in bulk.</p></div><button class="btn light" id="ownerLogout" style="display:none">Sign out</button></div>
       <div id="adminLoginBox" class="review-form" style="max-width:560px;margin:20px auto;padding:24px;background:#fffdf9;border:1px solid #e9dfd1;border-radius:18px">
         <form id="ownerLoginForm"><label for="ownerEmail">Owner email</label><input id="ownerEmail" type="email" required autocomplete="username" style="width:100%;padding:12px;margin:6px 0 14px;border:1px solid #d8cfc2;border-radius:10px"><label for="ownerPassword">Password</label><input id="ownerPassword" type="password" required autocomplete="current-password" style="width:100%;padding:12px;margin:6px 0 14px;border:1px solid #d8cfc2;border-radius:10px"><button class="btn" type="submit" id="ownerLoginBtn">Sign in</button><p id="ownerLoginStatus" role="status"></p></form>
       </div>
-      <div id="adminDashboard" style="display:none"><div style="display:flex;gap:12px;flex-wrap:wrap;margin:18px 0"><button class="btn" id="approveSelected">Approve selected</button><button class="btn light" id="rejectSelected">Reject selected</button><button class="btn light" id="refreshPending">Refresh</button><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="selectAllReviews"> Select all</label></div><p id="adminStatus" role="status"></p><div id="pendingReviews" class="reviews-list"></div></div>
+      <div id="adminDashboard" style="display:none"><div style="display:flex;gap:12px;flex-wrap:wrap;margin:18px 0"><button class="btn" id="approveSelected">Approve selected</button><button class="btn light" id="rejectSelected">Delete selected</button><button class="btn light" id="refreshPending">Refresh</button><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="selectAllReviews"> Select all</label></div><p id="adminStatus" role="status"></p><div id="pendingReviews" class="reviews-list"></div></div>
     </div>
   </section>
 
-  <footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> Jyoti's Cafe House. Made with ♥.</span><span>Thank you for supporting a small home café.</span></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> Jyoti's Cafe House. Made with ♥.</span><span>Thank you for supporting a small home café. <a class="admin-link" href="#admin" id="ownerLink">Owner login</a></span></div></footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
   <script src="config.js"></script>
   <script>
     // Read the public Supabase configuration from config.js.
@@ -127,36 +138,51 @@
     const SUPABASE_ANON_KEY = window.CAFE_SUPABASE_CONFIG?.publishableKey || "";
     const ZOMATO_URL = "https://zomato.onelink.me/xqzv/ffnzlzh7";
 
-    // Menu transcribed from the Zomato screenshots supplied by the café owner.
-    // Where the screenshot clipped the description, wording has been kept concise.
+    // Fallback menu, shown only if Supabase is unreachable. The live menu comes from Supabase.
     const menuItems = [
-      {name:"Veg Grilled Sandwich",price:"₹110",category:"Sandwiches",description:"Crispy grilled bread stuffed with fresh veggies and flavourful spices.",image:"assets/sandwich_veg.jpg"},
-      {name:"Veg Cheese Grilled Sandwich",price:"₹120",category:"Sandwiches",description:"Crispy grilled bread filled with gooey melted cheese, perfectly toasted.",image:"assets/sandwich_veg_cheese.jpg"},
-      {name:"Paneer Grilled Sandwich",price:"₹130",category:"Sandwiches",description:"Crispy grilled sandwich stuffed with flavourful paneer and fresh veggies.",image:"assets/sandwich_paneer.jpg"},
-      {name:"Paneer Cheese Grilled Sandwich",price:"₹140",category:"Sandwiches",description:"Crispy grilled sandwich loaded with spicy paneer and melted cheese.",image:"assets/sandwich_paneer_cheese.jpg"},
-      {name:"Cheese Burger",price:"₹100",category:"Burgers",description:"Soft toasted bun filled with a juicy patty, melted cheese and fresh veggies.",image:"assets/burger_cheese.jpg"},
-      {name:"Paneer Burger",price:"₹110",category:"Burgers",description:"Soft toasted bun loaded with a flavourful paneer patty and fresh veggies.",image:"assets/burger_paneer.jpg"},
-      {name:"Cheese Paneer Burger",price:"₹120",category:"Burgers",description:"Soft toasted bun loaded with flavourful paneer and melted cheese.",image:"assets/burger_cheese_paneer.jpg"},
-      {name:"Veg Burger",price:"₹100",category:"Burgers",description:"A delicious veggie patty loaded with fresh veggies and creamy sauce.",image:"assets/burger_veg.jpg"},
-      {name:"Mango Milkshake",price:"₹90",category:"Drinks",description:"Creamy, chilled milkshake with a rich, refreshing mango flavour.",image:"assets/drink_pineapple.jpg"},
-      {name:"Strawberry Milkshake",price:"₹90",category:"Drinks",description:"A creamy, chilled strawberry milkshake.",image:"assets/drink_oreo.jpg"},
-      {name:"Pineapple Milkshake",price:"₹90",category:"Drinks",description:"Creamy, chilled milkshake with a refreshing, sweet pineapple flavour.",image:"assets/drink_pineapple.jpg"},
-      {name:"Oreo Milkshake",price:"₹110",category:"Drinks",description:"Creamy, chilled milkshake blended with crunchy Oreo cookies.",image:"assets/drink_oreo.jpg"},
-      {name:"Thick Cold Coffee",price:"₹80",category:"Drinks",description:"Thick, creamy cold coffee blended to perfection with a rich coffee flavour.",image:"assets/drink_cold_coffee.jpg"},
-      {name:"Plain Fries",price:"₹80",category:"Fries",description:"Crispy golden fries, perfectly seasoned and served hot.",image:"assets/fries_plain.jpg"},
-      {name:"Masala Fries",price:"₹90",category:"Fries",description:"Crispy golden fries tossed in spicy, flavourful seasoning.",image:"assets/fries_masala.jpg"},
-      {name:"Cheese Burger + Plain Fries + Thick Cold Coffee",price:"₹200",category:"Combo",description:"A delicious combo with a cheese burger, plain fries and thick cold coffee.",image:"assets/burger_cheese.jpg"}
+      {name:"Veg Grilled Sandwich",price:110,category:"Sandwiches",description:"Crispy grilled bread stuffed with fresh veggies and flavourful spices.",image:"assets/sandwich_veg.jpg"},
+      {name:"Veg Cheese Grilled Sandwich",price:120,category:"Sandwiches",description:"Crispy grilled bread filled with gooey melted cheese, perfectly toasted.",image:"assets/sandwich_veg_cheese.jpg"},
+      {name:"Paneer Grilled Sandwich",price:130,category:"Sandwiches",description:"Crispy grilled sandwich stuffed with flavourful paneer and fresh veggies.",image:"assets/sandwich_paneer.jpg"},
+      {name:"Paneer Cheese Grilled Sandwich",price:140,category:"Sandwiches",description:"Crispy grilled sandwich loaded with spicy paneer and melted cheese.",image:"assets/sandwich_paneer_cheese.jpg"},
+      {name:"Cheese Burger",price:100,category:"Burgers",description:"Soft toasted bun filled with a juicy patty, melted cheese and fresh veggies.",image:"assets/burger_cheese.jpg"},
+      {name:"Paneer Burger",price:110,category:"Burgers",description:"Soft toasted bun loaded with a flavourful paneer patty and fresh veggies.",image:"assets/burger_paneer.jpg"},
+      {name:"Cheese Paneer Burger",price:120,category:"Burgers",description:"Soft toasted bun loaded with flavourful paneer and melted cheese.",image:"assets/burger_cheese_paneer.jpg"},
+      {name:"Veg Burger",price:100,category:"Burgers",description:"A delicious veggie patty loaded with fresh veggies and creamy sauce.",image:"assets/burger_veg.jpg"},
+      {name:"Mango Milkshake",price:90,category:"Drinks",description:"Creamy, chilled milkshake with a rich, refreshing mango flavour.",image:"assets/drink_pineapple.jpg"},
+      {name:"Strawberry Milkshake",price:90,category:"Drinks",description:"A creamy, chilled strawberry milkshake.",image:"assets/drink_oreo.jpg"},
+      {name:"Pineapple Milkshake",price:90,category:"Drinks",description:"Creamy, chilled milkshake with a refreshing, sweet pineapple flavour.",image:"assets/drink_pineapple.jpg"},
+      {name:"Oreo Milkshake",price:110,category:"Drinks",description:"Creamy, chilled milkshake blended with crunchy Oreo cookies.",image:"assets/drink_oreo.jpg"},
+      {name:"Thick Cold Coffee",price:80,category:"Drinks",description:"Thick, creamy cold coffee blended to perfection with a rich coffee flavour.",image:"assets/drink_cold_coffee.jpg"},
+      {name:"Plain Fries",price:80,category:"Fries",description:"Crispy golden fries, perfectly seasoned and served hot.",image:"assets/fries_plain.jpg"},
+      {name:"Masala Fries",price:90,category:"Fries",description:"Crispy golden fries tossed in spicy, flavourful seasoning.",image:"assets/fries_masala.jpg"},
+      {name:"Cheese Burger + Plain Fries + Thick Cold Coffee",price:200,category:"Combo",description:"A delicious combo with a cheese burger, plain fries and thick cold coffee.",image:"assets/burger_cheese.jpg"}
     ];
 
     const menuGrid = document.getElementById("menuGrid");
+    const menuFilters = document.getElementById("menuFilters");
+    const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23e8dfd2'/%3E%3C/svg%3E";
+    let allMenu = [], activeCat = "All";
     function renderMenu(items){
-      if(!items || !items.length){menuGrid.innerHTML='<div class="empty-reviews">The menu is temporarily unavailable. Please order through Zomato.</div>';return;}
-      menuGrid.innerHTML = items.map(item => `
+      allMenu = items || [];
+      if(!allMenu.length){menuFilters.innerHTML="";menuGrid.innerHTML='<div class="empty-reviews">The menu is temporarily unavailable. Please order through Zomato.</div>';return;}
+      const cats = ["All", ...new Set(allMenu.map(i=>i.category||"Cafe favourites"))];
+      if(!cats.includes(activeCat)) activeCat = "All";
+      menuFilters.innerHTML = cats.length>2 ? cats.map(c=>`<button type="button" class="chip${c===activeCat?' on':''}" data-cat="${escapeHtml(c)}" aria-pressed="${c===activeCat}">${escapeHtml(c)}</button>`).join("") : "";
+      const shown = activeCat==="All" ? allMenu : allMenu.filter(i=>(i.category||"Cafe favourites")===activeCat);
+      menuGrid.innerHTML = shown.map(item => `
         <article class="menu-card">
-          <img src="${escapeHtml(item.image_url || item.image || '')}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.style.opacity='.35'">
+          <img src="${escapeHtml(item.image_url || item.image || PLACEHOLDER)}" alt="${escapeHtml(item.name)}" width="400" height="300" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}'">
           <div class="menu-content"><span class="tag">${escapeHtml(item.category || 'Cafe favourites')}</span><div class="menu-meta"><h3>${escapeHtml(item.name)}</h3><span class="price">₹${Number(item.price).toLocaleString('en-IN')}</span></div><p>${escapeHtml(item.description || '')}</p></div>
         </article>`).join("");
     }
+    menuFilters.addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;activeCat=b.dataset.cat;renderMenu(allMenu);});
+    // Optional contact details from config.js (phone, whatsapp, address, hours). Shown only if filled in.
+    (function(){const c=window.CAFE_SUPABASE_CONFIG||{},el=document.getElementById("cafeInfo"),h=[];
+      if(c.hours)h.push("🕐 "+escapeHtml(c.hours));
+      if(c.address)h.push("📍 "+escapeHtml(c.address));
+      if(c.phone)h.push('📞 <a href="tel:'+escapeHtml(String(c.phone).replace(/[^+\d]/g,""))+'">'+escapeHtml(c.phone)+"</a>");
+      if(c.whatsapp)h.push('💬 <a href="https://wa.me/'+escapeHtml(String(c.whatsapp).replace(/\D/g,""))+'" target="_blank" rel="noopener">WhatsApp us</a>');
+      el.innerHTML=h.map(x=>"<span>"+x+"</span>").join("");})();
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes("PASTE_");
@@ -164,10 +190,10 @@
 
     if (configured && window.supabase) supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
     async function loadMenu(){
-      if(!supabaseClient){menuGrid.innerHTML='<div class="empty-reviews">The café menu will appear here once Supabase is connected.</div>';return;}
+      if(!supabaseClient){renderMenu(menuItems);return;}
       const {data,error}=await supabaseClient.from('cafe_menu_items').select('id,name,price,category,description,image_url,sort_order,is_available').eq('is_available',true).order('sort_order',{ascending:true});
-      if(error){menuGrid.innerHTML='<div class="empty-reviews">Menu temporarily unavailable. Please use the Zomato button to see the current menu.</div>';return;}
-      renderMenu(data || []);
+      if(error || !data || !data.length){renderMenu(menuItems);return;}
+      renderMenu(data);
     }
     // The same page hosts the private owner dashboard at #admin; no separate admin file.
     const adminPanel=document.getElementById('adminPanel');
@@ -213,27 +239,20 @@
       const ids=[...document.querySelectorAll('.pending-check:checked')].map(c=>Number(c.value));
       if(!ids.length){adminStatus.textContent='Select at least one review first.';return;}
       if(!supabaseClient){adminStatus.textContent='Supabase is not configured.';return;}
+      if(!approve && !confirm('Permanently delete '+ids.length+' review(s)?')) return;
       const actionButtons=[document.getElementById('approveSelected'),document.getElementById('rejectSelected')];
       actionButtons.forEach(b=>b.disabled=true);
-      adminStatus.textContent='Updating '+ids.length+' review(s)…';
+      adminStatus.textContent=(approve?'Approving ':'Deleting ')+ids.length+' review(s)…';
       try{
-        // Request the updated IDs so we can detect RLS policies that silently update zero rows.
-        const request=supabaseClient.from('cafe_reviews').update({approved: approve}).in('id',ids).select('id');
-        const result=await Promise.race([
-          request,
-          new Promise((_,reject)=>setTimeout(()=>reject(new Error('The request took too long. Check your connection and Supabase status, then refresh the page.')),15000))
-        ]);
+        // .select('id') lets us detect RLS policies that silently affect zero rows.
+        const table=supabaseClient.from('cafe_reviews');
+        const request=approve ? table.update({approved:true}).in('id',ids).select('id') : table.delete().in('id',ids).select('id');
+        const result=await Promise.race([request,new Promise((_,reject)=>setTimeout(()=>reject(new Error('The request took too long. Check your connection, then refresh.')),15000))]);
         if(result.error) throw result.error;
-        const updated=result.data||[];
-        if(updated.length===0){
-          adminStatus.textContent='No reviews were updated. Check that you are logged in as an admin and that the “Admins update reviews” RLS policy is enabled in Supabase.';
-          return;
-        }
-        if(updated.length!==ids.length){
-          adminStatus.textContent='Updated '+updated.length+' of '+ids.length+' reviews. Check admin permissions and refresh the pending list.';
-        }else{
-          adminStatus.textContent=updated.length+' review(s) '+(approve?'approved.':'rejected and hidden.');
-        }
+        const done=result.data||[];
+        if(done.length===0) adminStatus.textContent='Nothing was changed. Make sure you are signed in as admin and have re-run supabase_setup.sql (it adds the delete permission).';
+        else if(done.length!==ids.length) adminStatus.textContent='Changed '+done.length+' of '+ids.length+' reviews. Refresh and try again.';
+        else adminStatus.textContent=done.length+' review(s) '+(approve?'approved.':'deleted.');
         document.getElementById('selectAllReviews').checked=false;
         await loadPendingReviews();
         await loadReviews();
@@ -271,6 +290,9 @@
       if(!supabaseClient){status.textContent="Review submission is not set up yet. The site owner needs to connect the review database.";return;}
       const rating=document.querySelector('input[name="rating"]:checked');
       if(!rating){status.textContent="Please choose a star rating.";return;}
+      if(document.getElementById("reviewWebsite").value){status.textContent="Thank you! Your review has been sent for approval.";return;} // bot trap
+      let last=0;try{last=Number(localStorage.getItem("cafeReviewAt")||0);}catch(_){}
+      if(Date.now()-last<60000){status.textContent="Please wait a minute before sending another review.";return;}
       const name=document.getElementById("reviewName").value.trim();
       const review=document.getElementById("reviewText").value.trim();
       if(!review){status.textContent="Please write a short review.";return;}
@@ -278,6 +300,7 @@
       const {error}=await supabaseClient.from("cafe_reviews").insert([{name:name||"A customer",rating:Number(rating.value),review,approved:false}]);
       button.disabled=false;
       if(error){status.textContent="Sorry, we couldn't submit your review. Please try again later.";return;}
+      try{localStorage.setItem("cafeReviewAt",String(Date.now()));}catch(_){}
       e.target.reset();status.textContent="Thank you! Your review has been sent for approval and will appear once reviewed.";
     });
     loadMenu();
